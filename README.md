@@ -7,5 +7,5 @@ Member<br>
 66070501043 Phoorin Chinphuad<br>
 66070501041 Phubordin Ramsiri<br>
 FLOW CHART<br>
-<img alt="Flow chart" src="49862.jpg">
+<img alt="Flow chart" src="Flow_chart.jpg">
 
