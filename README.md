@@ -9,3 +9,10 @@ Member<br>
 FLOW CHART<br>
 <img alt="Flow chart" src="Flow_chart.jpg">
 
+# Responsibilities <br>
+<li>ภู - กราฟฟิคลานจอด</li> <br>
+<li>นาย - จัดเก็บรถลงโลเคชั่น</li> <br>
+<li>ฟีน - join table</li> <br>
+<li>ฟีฟ่า - เสิร์ชโลเคชั่น กับ ที่ว่าง</li> <br>
+<li>เอฟ - เวลากับคำนวณราคา</li> <br>
+<li>นัท - ระบบเมมเบอร์</li> <br>
