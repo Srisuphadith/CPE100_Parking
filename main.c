@@ -22,8 +22,6 @@ int main()
 
     read_file_location(&fp_location, car);
     // write_to_file_location(&fp_location, "A", 5, 1, "00791600");
-    fclose(fp_location);
-
     // printf("%d\n",car[0].slot);
     // printf("%d\n",car[1].slot);
     for(int cc =0;cc<24;cc++){
@@ -40,7 +38,7 @@ void write_to_file_location(FILE **fp, char floor[], int slot, int status, char 
     char buff[200];
     int index;
     int pos[25];
-    rewind(*fp);
+    *fp = fopen("car_location.csv", "r+");
     for (int i = 0; i < 25; i++) // find file pointer of line
     {
         pos[i] = ftell(*fp);
@@ -63,6 +61,7 @@ void write_to_file_location(FILE **fp, char floor[], int slot, int status, char 
     fseek(*fp, pos[index], 0);              // debug
     fscanf(*fp, "%s", buff);                // debug
     // printf("--%s--\n", buff);               // debug
+     fclose(*fp);
 }
 //------------------------------------------------------------------------------------------
 void read_file_location(FILE **fp, location *car)
@@ -91,4 +90,5 @@ void read_file_location(FILE **fp, location *car)
         strcpy((car + i)->license, token);//save license
         (car + i)->license[8] = '\0';
     }
+    fclose(*fp);
 }
