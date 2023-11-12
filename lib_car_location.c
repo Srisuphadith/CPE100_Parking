@@ -11,7 +11,7 @@ typedef struct // define location datatype
 
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]);
 void read_file_location(FILE **fp, location *car);
-
+int read_file_and_print();
 //------------------------------------------------------------------------------------------
 int read_file_and_print()
 {
@@ -34,13 +34,12 @@ int read_file_and_print()
     
 }
 //------------------------------------------------------------------------------------------
-
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]) //,int pos[], char floor[], char slot[], char status[], char license[]
 {
     char buff[200];
     int index;
     int pos[25];
-    rewind(*fp);
+    *fp = fopen("car_location.csv", "r+");
     for (int i = 0; i < 25; i++) // find file pointer of line
     {
         pos[i] = ftell(*fp);
@@ -63,6 +62,7 @@ void write_to_file_location(FILE **fp, char floor[], int slot, int status, char 
     fseek(*fp, pos[index], 0);              // debug
     fscanf(*fp, "%s", buff);                // debug
     // printf("--%s--\n", buff);               // debug
+     fclose(*fp);
 }
 //------------------------------------------------------------------------------------------
 void read_file_location(FILE **fp, location *car)
@@ -91,4 +91,5 @@ void read_file_location(FILE **fp, location *car)
         strcpy((car + i)->license, token);//save license
         (car + i)->license[8] = '\0';
     }
+    fclose(*fp);
 }
