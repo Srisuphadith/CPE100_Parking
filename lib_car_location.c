@@ -93,3 +93,35 @@ void read_file_location(FILE **fp, location *car)
     }
     fclose(*fp);
 }
+
+
+//------------------------------------------------------------------------------------------
+//findAvailable from (**file , *location , floor)
+int findAvailable(FILE **fp , location *car ,char floor[2]){
+
+    read_file_location(fp, car); //call read_file_location
+
+    int isAvailable , slot , space =0;
+
+    //check floor input and return find how many space
+    for(int i=0;i<24;i++){
+        if(strcmp( floor , car[i].floor)==0){
+            if(car[i].status == 0){
+                space++;
+            }
+        }
+    }
+
+    return space;
+}
+
+
+
+    // Ex of uses     
+// int main(void){
+//     location car[25];
+//     FILE *fp_location;
+//     printf("%d",findAvailable(&fp_location, car , "A") );
+//     return 0;
+// }
+//------------------------------------------------------------------------------------------
