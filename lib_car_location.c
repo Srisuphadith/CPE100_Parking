@@ -72,6 +72,7 @@ void read_file_location(FILE **fp, location *car)
     }
     fclose(*fp);
 }
+
 //------------------------------------------------------------------------------------------
 //findAvailable from (**file , *location , floor)
 int findAvailable(FILE **fp , location *car ,char floor[2]){
