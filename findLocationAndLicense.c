@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "lib_car_location.c"
 
-// findAvailable from (**file , *location , license)
+// findAvailable from (**file , *location , license) make it pointer to get value as character
 char *findLocationFromLicense(FILE **fp, location *car, char license[9])
 {
     char locat[5];
