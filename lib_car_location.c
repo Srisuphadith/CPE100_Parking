@@ -11,28 +11,7 @@ typedef struct // define location datatype
 
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]);
 void read_file_location(FILE **fp, location *car);
-int read_file_and_print();
-//------------------------------------------------------------------------------------------
-int read_file_and_print()
-{
-    // char buff[25][200]; // A(1-8),B(9-16),C(17,24)
 
-    location car[25];
-    FILE *fp_location;
-
-    read_file_location(&fp_location, car);
-    // write_to_file_location(&fp_location, "A", 5, 1, "00791600");
-    fclose(fp_location);
-
-    // printf("%d\n",car[0].slot);
-    // printf("%d\n",car[1].slot);
-    for(int cc =0;cc<24;cc++){
-        printf("%s %d %d %s\n",car[cc].floor,car[cc].slot,car[cc].status,car[cc].license);
-    }
-    
-    return 0;
-    
-}
 //------------------------------------------------------------------------------------------
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]) //,int pos[], char floor[], char slot[], char status[], char license[]
 {
@@ -93,8 +72,6 @@ void read_file_location(FILE **fp, location *car)
     }
     fclose(*fp);
 }
-
-
 //------------------------------------------------------------------------------------------
 //findAvailable from (**file , *location , floor)
 int findAvailable(FILE **fp , location *car ,char floor[2]){
