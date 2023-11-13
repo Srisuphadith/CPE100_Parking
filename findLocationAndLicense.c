@@ -33,24 +33,24 @@ char *findLocationFromLicense(FILE **fp, location *car, char license[9])
 }
 
 // Ex of uses
-int main(void)
-{
-    location car[25];
-    FILE *fp_location;
+// int main(void)
+// {
+//     location car[25];
+//     FILE *fp_location;
 
-    // return floor and slot of license that input to the function
-    char *result = findLocationFromLicense(&fp_location, car, "00444445");
+//     // return floor and slot of license that input to the function
+//     char *result = findLocationFromLicense(&fp_location, car, "00444445");
 
-    // check return value
-    if (strcmp(result, "License not found") == 0)
-    {
-        printf("License not found\n");
-    }
-    else
-    {
-        printf("Location: %s\n", result);
-    }
-    free(result); // Free the allocated memory
+//     // check return value
+//     if (strcmp(result, "License not found") == 0)
+//     {
+//         printf("License not found\n");
+//     }
+//     else
+//     {
+//         printf("Location: %s\n", result);
+//     }
+//     free(result); // Free the allocated memory
 
-    return 0;
-}
+//     return 0;
+// }
