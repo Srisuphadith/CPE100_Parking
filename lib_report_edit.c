@@ -20,7 +20,7 @@ void read_file_location(FILE *file, report_sheet_info *sheet);
 int main()
 {
     
-    report_sheet_info *sheet = sheets;
+    //report_sheet_info *sheet = sheets;
 
     FILE *file;
 
@@ -41,6 +41,7 @@ int main()
     {
         pos[i] = ftell(file);
         printf("%s\n", buff);
+        printf("%d\n", pos[i]);
         if(strstr(buff,new_license_plate))
         {
             break;
@@ -48,7 +49,7 @@ int main()
     }
     printf("%d",index);
     fseek(file, pos[index] + 2, 0); 
-    printf("\n %p", pos[index]);         // change file pointer in floor and slot to state and license
+    printf("\n %d", pos[index]);         // change file pointer in floor and slot to state and license
     fprintf(file, "%s,%s,%s,%s,%s,%.2f,%s,%s"
     , new_license_plate
     , new_province
