@@ -11,6 +11,9 @@ typedef struct // define location datatype
 
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]);
 void read_file_location(FILE **fp, location *car);
+int findAvailable(FILE **fp , location *car ,char floor[2]);
+char *findLocationFromLicense(FILE **fp, location *car, char license[9]);
+char *findLicenseFromLocation(FILE **fp, location *car, char location[3]);
 
 //------------------------------------------------------------------------------------------
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]) //,int pos[], char floor[], char slot[], char status[], char license[]
