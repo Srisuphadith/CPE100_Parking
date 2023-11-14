@@ -57,23 +57,12 @@ void read_file_report(FILE **fp, report_info *sheet, int *indexs)
     fclose(*fp);
 }
 
-void input_lp(int *index)
-{
-    char n_lp[7];
-    char id_pv[3];
+// int main()
+// {
 
-    printf("license plate : ");
-    scanf("%6s%2s", n_lp, id_pv);
-}
+//     FILE *file;
 
-int main()
-{
+//     report_info sheets[100];
 
-    FILE *file;
-
-    report_info sheets[100];
-    int index;
-
-    read_file_report( &file, sheets, &index);
-    input_lp(&index);
-}
+//     read_file_report( &file, sheets, &index);
+// }
