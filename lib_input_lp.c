@@ -3,7 +3,7 @@
 #include"lib_report_readandrewrite.c"
 #include"convert_province.c"
 
-void input_lp(int *count)
+void input_lp(FILE **fp, report_info *sheet, int *indexs)
 {
     char n_lp[7];
     char id_pv[3];
@@ -13,8 +13,12 @@ void input_lp(int *count)
     scanf("%6s%2s", n_lp, id_pv);
     printf("%s\n", n_lp);
     printf("%s\n", id_pv);
-    // convert_province( id_pv, pv);
-    // printf("%s\n", pv);
+    convert_province( atoi(id_pv), pv);
+    if(find_lp_report( &*fp, sheet, indexs, n_lp))
+    {
+        
+    }
+
 }
 
 int main()
@@ -24,6 +28,6 @@ int main()
     int index;
 
     read_file_report( &file, report, &index);
-    input_lp( &index);
+    input_lp( &file, report, &index);
 
 }

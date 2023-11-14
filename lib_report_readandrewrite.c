@@ -14,6 +14,7 @@ typedef struct
 } report_info ;
 
 void read_file_report(FILE **fp, report_info *sheet, int *indexs);
+int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[]);
 
 void read_file_report(FILE **fp, report_info *sheet, int *indexs)
 {
@@ -53,16 +54,24 @@ void read_file_report(FILE **fp, report_info *sheet, int *indexs)
 
     }
     
-    printf("\nindex is %d", *indexs);
     fclose(*fp);
 }
 
-// int main()
-// {
 
-//     FILE *file;
 
-//     report_info sheets[100];
-
-//     read_file_report( &file, sheets, &index);
-// }
+int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[])
+{
+    printf("%d\n", *indexs1);
+    for(int i = 0;i <= *indexs1 ;i++)
+    {
+        printf("%d\n", i);
+        printf("%s\n", (sheet + i)->lp);
+        if(strcmp(lp,(sheet + i)->lp) == 0)
+        {
+            printf("found lp");
+            return 1;
+        }
+    }
+    printf("not found lp");
+    return 0;
+}
