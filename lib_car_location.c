@@ -72,3 +72,128 @@ void read_file_location(FILE **fp, location *car)
     }
     fclose(*fp);
 }
+
+//------------------------------------------------------------------------------------------
+//findAvailable from (**file , *location , floor)
+int findAvailable(FILE **fp , location *car ,char floor[2]){
+
+    read_file_location(fp, car); //call read_file_location
+
+    int isAvailable , slot , space =0;
+
+    //check floor input and return find how many space
+    for(int i=0;i<24;i++){
+        if(strcmp( floor , car[i].floor)==0){
+            if(car[i].status == 0){
+                space++;
+            }
+        }
+    }
+
+    return space;
+}
+
+
+
+    // Ex of uses     
+// int main(void){
+//     location car[25];
+//     FILE *fp_location;
+//     printf("%d",findAvailable(&fp_location, car , "A") );
+//     return 0;
+// }
+
+//------------------------------------------------------------------------------------------
+// findAvailable from (**file , *location , license) make it pointer to get value as character
+char *findLocationFromLicense(FILE **fp, location *car, char license[9])
+{
+    char locat[5];
+    read_file_location(fp, car); // call read_file_location
+
+    // check license input and return find location
+    for (int i = 0; i < 24; i++)
+    {
+
+        // check giving license and license in file
+        if (strcmp(license, car[i].license) == 0)
+        {
+            // locat = car[i].floor[0] + car[i].slot;  ***car[i].floor[0] is char | car[i].slot is int
+            snprintf(locat, sizeof(locat), "%c%d", car[i].floor[0], car[i].slot);
+
+            // result is value in address malloc
+            char *result = malloc(strlen(locat) + 1);
+            strcpy(result, locat);
+            return result;
+        }
+    }
+    // notFoundMessage is value in address malloc
+    char *notFoundMessage = malloc(strlen("License not found") + 1);
+    strcpy(notFoundMessage, "License not found");
+    return notFoundMessage;
+}
+
+// Ex of uses
+// int main(void)
+// {
+//     location car[25];
+//     FILE *fp_location;
+
+//     // return floor and slot of license that input to the function
+//     char *result = findLocationFromLicense(&fp_location, car, "00444445");
+
+//     // check return value
+//     if (strcmp(result, "License not found") == 0)
+//     {
+//         printf("License not found\n");
+//     }
+//     else
+//     {
+//         printf("Location: %s\n", result);
+//     }
+//     free(result); // Free the allocated memory
+
+//     return 0;
+// }
+
+//------------------------------------------------------------------------------------------
+// findAvailable from (**file , *location , location) make it pointer to get value as character
+char *findLicenseFromLocation(FILE **fp, location *car, char location[3])
+{
+    char locat[5];
+    read_file_location(fp, car); // call read_file_location
+
+    // check location input and return find location
+    for (int i = 0; i < 24; i++)
+    {
+
+        // check giving location and location in file
+        if ((location[0] == car[i].floor[0]) && (location[1] == (char)('0' + car[i].slot)))
+        {
+            return car[i].license;
+        }
+    }
+    return "Doesn't Have This Location";
+}
+
+// Ex of uses
+// int main(void)
+// {
+//     location car[25];
+//     FILE *fp_location;
+
+//     // return license of location that input to the function
+//     char *result = findLicenseFromLocation(&fp_location, car, "A1");
+
+//     // check return value
+//     if (strcmp(result, "Doesn't Have This Location") == 0)
+//     {
+//         printf("Doesn't Have This Location\n");
+//     }
+//     else
+//     {
+//         printf("License: %s\n", result);
+//     }
+
+//     return 0;
+// }
+//------------------------------------------------------------------------------------------
