@@ -71,6 +71,7 @@ void read_file_location(FILE **fp, location *car)
 
         token = strtok(NULL, ",");
         strcpy((car + i)->license, token);//save license
+        //printf("%s\n",token);
         (car + i)->license[8] = '\0';
     }
     fclose(*fp);
