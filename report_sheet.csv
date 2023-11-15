@@ -1,6 +1,5 @@
 license_plate,province,time_in,time_out,price,car_location,member
-AB1500,sakaeo,time_in,time_out,100.00,A1,member
-PB1400,Buriram,time_in,time_out,100.00,A1,member
-EB1300,Chiang_Mai,time_in,time_out,100.00,A1,member
-CB1200,Kalasin,time_in,time_out,100.00,A1,member
-AC1100,Krabi,time_in,time_out,100.00,A1,member
+AB1000,Bangkok,4:46:34,4:46:40,1000.00,B3,non-member
+AC1000,Sa_kaeo,4:59:34,5:7:4,1000.00,B3,non-member
+AC2000,Bangkok,5:3:17,-,0.00,B3,non-member
+AA0000,Bangkok,5:5:29,5:7:54,1000.00,B3,non-member

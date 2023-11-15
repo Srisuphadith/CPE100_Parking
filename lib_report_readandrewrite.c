@@ -15,7 +15,9 @@ typedef struct
 
 void read_file_report( FILE **fp, report_info *sheet, int *indexs);
 void rewrite_file_report( FILE **fp, report_info *sheet, int indexs);
-void write_new_lp_report( report_info *sheet, int *index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[]);
+int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[]);
+void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], int price);
+void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl);
 int find_lp_report( FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[]);
 
 void read_file_report( FILE **fp, report_info *sheet, int *indexs)
@@ -28,7 +30,7 @@ void read_file_report( FILE **fp, report_info *sheet, int *indexs)
 
     fscanf( *fp, "%s", tmp);
 
-    for (int i = 1; fscanf( *fp, "%s", tmp) != EOF; i++, *indexs = i)
+    for (int i = 0; fscanf( *fp, "%s", tmp) != EOF; i++, *indexs = i)
     {
 
         char *token = strtok( tmp, ",");
@@ -72,7 +74,7 @@ void rewrite_file_report( FILE **fp, report_info *sheet, int indexs)
     char o_mb[7] = "member";
 
     fprintf( *fp, "%s,%s,%s,%s,%s,%s,%s\n", o_lp, o_pv, o_ti, o_to, o_p, o_cl, o_mb);
-    for(int i = 1; i < indexs; i++){
+    for(int i = 0; i < indexs; i++){
 
         fprintf( *fp, "%s,%s,%s,%s,%.2f,%s,%s\n"
         , (sheet + i)->lp
@@ -88,10 +90,10 @@ void rewrite_file_report( FILE **fp, report_info *sheet, int indexs)
     fclose(*fp);
 }
 
-void write_new_lp_report( report_info *sheet, int *index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[])
+int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[])
 {
 
-    int i = *index2 ;
+    int i = index2 ;
 
     strcpy( (sheet + i)->lp, n_lp);
     strcpy( (sheet + i)->pv, n_pv);
@@ -101,19 +103,40 @@ void write_new_lp_report( report_info *sheet, int *index2,char n_lp[], char n_pv
     strcpy( (sheet + i)->cl, n_cl);
     strcpy( (sheet + i)->mb, mb_s);
 
-    printf("%d\n", index2);
-    index2 += 1;
-    printf("%d\n", index2);
+    i += 1;
+    return i;
+}
+
+void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], int price)
+{
+    int i = loc;
+
+    strcpy( (sheet + i)->lp, (sheet + i)->lp);
+    strcpy( (sheet + i)->pv, (sheet + i)->pv);
+    strcpy( (sheet + i)->t_in, (sheet + i)->t_in);
+    strcpy( (sheet + i)->t_out, n_t_out);
+    (sheet + i)->price = price;
+    strcpy( (sheet + i)->cl, (sheet + i)->cl);
+    strcpy( (sheet + i)->mb, (sheet + i)->mb);
+    
+}
+
+void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl)
+{
+    int i = loc;
+
+    strcpy( o_t_in, (sheet + i)->t_in);
+    strcpy( o_cl, (sheet + i)->cl);
 }
 
 int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[])
 {
     // printf("%d\n", *indexs1);
-    for(int i = 0;i <= *indexs1 ;i++)
+    for(int i = 0;i < *indexs1 ;i++)
     {
         if(strcmp(lp,(sheet + i)->lp) == 0 && strcmp(pv,(sheet + i)->pv) == 0) 
         {
-            return 1;
+            return i;
         }
     }
     return 0;
