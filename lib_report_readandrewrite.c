@@ -59,14 +59,14 @@ void read_file_report(FILE **fp, report_info *sheet, int *indexs)
 
 
 
-int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[])
+int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[])
 {
     printf("%d\n", *indexs1);
     for(int i = 0;i <= *indexs1 ;i++)
     {
         printf("%d\n", i);
         printf("%s\n", (sheet + i)->lp);
-        if(strcmp(lp,(sheet + i)->lp) == 0)
+        if((strcmp(lp,(sheet + i)->lp) == 0) && (strcmp(pv,(sheet + i)->pv) == 0))
         {
             printf("found lp");
             return 1;

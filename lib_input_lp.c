@@ -14,9 +14,11 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
     printf("%s\n", n_lp);
     printf("%s\n", id_pv);
     convert_province( atoi(id_pv), pv);
-    if(find_lp_report( &*fp, sheet, indexs, n_lp))
+    if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
         
+    }else{
+
     }
 
 }
