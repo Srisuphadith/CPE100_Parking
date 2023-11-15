@@ -13,10 +13,12 @@ typedef struct
     char mb[11];//member
 } report_info ;
 
-void read_file_report(FILE **fp, report_info *sheet, int *indexs);
-int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[]);
+void read_file_report( FILE **fp, report_info *sheet, int *indexs);
+void rewrite_file_report( FILE **fp, report_info *sheet, int indexs);
+void write_new_lp_report( report_info *sheet, int *index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[]);
+int find_lp_report( FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[]);
 
-void read_file_report(FILE **fp, report_info *sheet, int *indexs)
+void read_file_report( FILE **fp, report_info *sheet, int *indexs)
 {
 
     *fp = fopen("report_sheet.csv","r+");
@@ -26,7 +28,7 @@ void read_file_report(FILE **fp, report_info *sheet, int *indexs)
 
     fscanf( *fp, "%s", tmp);
 
-    for (int i = 0; fscanf( *fp, "%s", tmp) != EOF; i++, *indexs = i)
+    for (int i = 1; fscanf( *fp, "%s", tmp) != EOF; i++, *indexs = i)
     {
 
         char *token = strtok( tmp, ",");
@@ -57,7 +59,52 @@ void read_file_report(FILE **fp, report_info *sheet, int *indexs)
     fclose(*fp);
 }
 
+void rewrite_file_report( FILE **fp, report_info *sheet, int indexs)
+{
+    *fp = fopen("report_sheet.csv","w");
 
+    char o_lp[14] = "license_plate";
+    char o_pv[9] = "province";
+    char o_ti[8] = "time_in";
+    char o_to[9] = "time_out";
+    char o_p[6] = "price";
+    char o_cl[13] = "car_location";
+    char o_mb[7] = "member";
+
+    fprintf( *fp, "%s,%s,%s,%s,%s,%s,%s\n", o_lp, o_pv, o_ti, o_to, o_p, o_cl, o_mb);
+    for(int i = 1; i < indexs; i++){
+
+        fprintf( *fp, "%s,%s,%s,%s,%.2f,%s,%s\n"
+        , (sheet + i)->lp
+        , (sheet + i)->pv
+        , (sheet + i)->t_in
+        , (sheet + i)->t_out
+        , (sheet + i)->price
+        , (sheet + i)->cl
+        , (sheet + i)->mb);
+
+    }
+
+    fclose(*fp);
+}
+
+void write_new_lp_report( report_info *sheet, int *index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[])
+{
+
+    int i = *index2 ;
+
+    strcpy( (sheet + i)->lp, n_lp);
+    strcpy( (sheet + i)->pv, n_pv);
+    strcpy( (sheet + i)->t_in, n_t_in);
+    strcpy( (sheet + i)->t_out, "-");
+    (sheet + i)->price = 0;
+    strcpy( (sheet + i)->cl, n_cl);
+    strcpy( (sheet + i)->mb, mb_s);
+
+    printf("%d\n", index2);
+    index2 += 1;
+    printf("%d\n", index2);
+}
 
 int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[])
 {

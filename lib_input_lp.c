@@ -4,20 +4,47 @@
 #include"convert_province.c"
 #include"lib_time.c"
 
+void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[]);
+void input_lp(FILE **fp, report_info *sheet, int *indexs);
+
+void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[])
+{
+    if( d_price == 0 && (strcmp( d_df_time,"-") == 0 ) && (strcmp( d_t_out,"-") == 0))
+    {
+        printf("lp : %s %s\n", d_lp, d_pv);
+        printf("Time_in : %s\n", d_t_in);
+        printf("location: %s\n", d_cl);
+    }else{
+        printf("lp : %s %s\n", d_lp, d_pv);
+        printf("Time_in   : %s\n", d_t_in);
+        printf("Time_out  : %s\n", d_t_in);
+        printf("Time_total: %s\n", d_t_in);
+        printf("location: %s\n", d_cl);
+        printf("Price : %.2f ฿", d_price);
+    }
+}
+
 void input_lp(FILE **fp, report_info *sheet, int *indexs)
 {
     char n_lp[7];
     char id_pv[3];
     char pv[26];
+    char t[9];
 
     printf("license plate : ");
     scanf("%6s%2s", n_lp, id_pv);
     convert_province( atoi(id_pv), pv);
+
     if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
-        printf("found lp");
+        printf("found lp\n");
+        call_time(t);
+
     }else{
-        printf("not found lp");
+        call_time(t);
+        display( n_lp, pv, t, "-", "-", 0, "b1");
+        write_new_lp_report( sheet, indexs, n_lp, pv, t, "B3", "non-member");
+        rewrite_file_report( &*fp, sheet, *indexs);
     }
 
 }
