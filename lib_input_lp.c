@@ -2,6 +2,7 @@
 #include<string.h>
 #include"lib_report_readandrewrite.c"
 #include"convert_province.c"
+#include"lib_time.c"
 
 void input_lp(FILE **fp, report_info *sheet, int *indexs)
 {
