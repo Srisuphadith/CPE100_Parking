@@ -1,5 +1,5 @@
 license_plate,province,time_in,time_out,price,car_location,member
 AB1000,Bangkok,4:46:34,4:46:40,1000.00,B3,non-member
 AC1000,Sa_kaeo,4:59:34,5:7:4,1000.00,B3,non-member
-AC2000,Bangkok,5:3:17,-,0.00,B3,non-member
+AC2000,Bangkok,5:3:17,5:9:23,1000.00,B3,non-member
 AA0000,Bangkok,5:5:29,5:7:54,1000.00,B3,non-member
