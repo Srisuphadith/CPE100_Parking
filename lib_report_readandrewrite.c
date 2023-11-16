@@ -16,7 +16,7 @@ typedef struct
 void read_file_report( FILE **fp, report_info *sheet, int *indexs);
 void rewrite_file_report( FILE **fp, report_info *sheet, int indexs);
 int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[]);
-void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], int price);
+void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price);
 void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl);
 int find_lp_report( FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[]);
 
@@ -107,7 +107,7 @@ int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[]
     return i;
 }
 
-void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], int price)
+void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price)
 {
     int i = loc;
 
@@ -132,16 +132,12 @@ void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl)
 int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[])
 {
     // printf("%d\n", *indexs1);
-    for(int i = 0;i < *indexs1 ;i++)
+    for(int i = *indexs1;i >= 0 ;i--)
     {
-        if(strcmp(lp,(sheet + i)->lp) == 0 && strcmp(pv,(sheet + i)->pv) == 0) 
+        if(strcmp(lp,(sheet + i)->lp) == 0 && strcmp(pv,(sheet + i)->pv) == 0 && strcmp( (sheet + i)->t_out, "-") == 0) 
         {
             return i+1;
         }
-        // else if( strcmp( (sheet + i)->t_out, "-"))
-        // {
-        //     return -1;
-        // }
     }
     return 0;
 }

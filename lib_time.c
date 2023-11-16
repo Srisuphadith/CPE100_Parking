@@ -41,18 +41,25 @@ void cv_df_stotime(int t_sec, char *time)
 void df_ctoi_time(char *c_time1, char *c_time2, int *df_sec)
 {
     int df = 0;
-    char *token = strtok( c_time2, ":");
+    char tmp[9];
+    strcpy( tmp, c_time2);
+
+    char *token = strtok( tmp, ":");
         df += (atoi(token)*3600);
     token = strtok( NULL, ":");
         df += atoi(token)*60;
     token = strtok( NULL, ":");
         df += atoi(token);
-    token = strtok( c_time1, ":");
+
+    strcpy( tmp, c_time1);
+
+    token = strtok( tmp, ":");
         df -= atoi(token)*3600;
     token = strtok( NULL, ":");
         df -= atoi(token)*60;
     token = strtok( NULL, ":");
         df -= atoi(token);
+
     *df_sec = df;
 }   
 

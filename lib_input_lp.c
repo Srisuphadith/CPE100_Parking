@@ -3,6 +3,7 @@
 #include"lib_report_readandrewrite.c"
 #include"convert_province.c"
 #include"lib_time.c"
+#include"lib_price.c"
 
 void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[]);
 void input_lp(FILE **fp, report_info *sheet, int *indexs);
@@ -15,15 +16,11 @@ void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_
         printf("Time_in : %s\n", d_t_in);
         printf("location: %s\n", d_cl);
     }else{
-        char df_t[9];
-        int df_s;
-
+        
         printf("lp : %s %s\n", d_lp, d_pv);
         printf("Time_in   : %s\n", d_t_in);
         printf("Time_out  : %s\n", d_t_out);
-        df_ctoi_time( d_t_in, d_t_out, &df_s);
-        cv_df_stotime( df_s, df_t);
-        printf("Time_total: %s\n", df_t);
+        printf("Time_total: %s\n", d_df_time);
         printf("location: %s\n", d_cl);
         printf("Price : %.2f bath", d_price);
     }
@@ -37,20 +34,27 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
     char o_t[9];
     char t[9];
     char cl[3];
+    float pr;
+    char df_t[9];
+    int df_s;
 
     printf("license plate : ");
     scanf("%6s%2s", n_lp, id_pv);
     convert_province( atoi(id_pv), pv);
-
+    
     if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
         int loc = (find_lp_report( &*fp, sheet, indexs, n_lp, pv)-1);
         // printf("%d\n", loc);
         call_time(t);
         read_old_lp_report( sheet, loc, o_t, cl);
-        write_old_lp_report( sheet, loc, t, 1000);
+        df_ctoi_time( o_t, t, &df_s);
+        cv_df_stotime( df_s, df_t);
+        pr = calculate_price( df_s, "non-member");
+        printf("%f\n", pr);
+        write_old_lp_report( sheet, loc, t, pr);
         rewrite_file_report( &*fp, sheet, *indexs);
-        display( n_lp, pv, o_t, t, "-", 0, cl); 
+        display( n_lp, pv, o_t, t, df_t, pr, cl); 
     }else{
         call_time(t);
         display( n_lp, pv, t, "-", "-", 0, "b1");
