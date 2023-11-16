@@ -65,13 +65,13 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
 
 }
 
-int main()
-{
-    FILE *file;
-    report_info report[100];
-    int index = 0;
+// int main()
+// {
+//     FILE *file;
+//     report_info report[100];
+//     int index = 0;
 
-    read_file_report( &file, report, &index);
-    input_lp( &file, report, &index);
+//     read_file_report( &file, report, &index);
+//     input_lp( &file, report, &index);
 
-}
+// }
