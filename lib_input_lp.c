@@ -50,8 +50,7 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
         read_old_lp_report( sheet, loc, o_t, cl);
         df_ctoi_time( o_t, t, &df_s);
         cv_df_stotime( df_s, df_t);
-        pr = calculate_price( df_s, "non-member");
-        printf("%f\n", pr);
+        pr = calculate_price( df_s, "member");
         write_old_lp_report( sheet, loc, t, pr);
         rewrite_file_report( &*fp, sheet, *indexs);
         display( n_lp, pv, o_t, t, df_t, pr, cl); 

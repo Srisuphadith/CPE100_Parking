@@ -26,12 +26,21 @@ float calculate_price( int sec, char mb[])
     }
 
     fscanf( fp, "%s", tmp);
-    for ( int i = 0; fscanf( fp,"%s,%d,%d", pr_info[i].mb_st, &pr_info[i].hr_low, &pr_info[i].pr) != EOF; i++)
+    for ( int i = 0; fscanf( fp,"%s", tmp) != EOF; i++)
     {
+        char *token = strtok( tmp, ",");
+        strcpy( pr_info[i].mb_st, token);
+
+        token = strtok( NULL, ",");
+        pr_info[i].hr_low = atoi(token);
+
+        token = strtok( NULL, ",");
+        pr_info[i].pr = atoi(token);
 
         int h_s = pr_info[i].hr_low * 3600;
         float pr_s = pr_info[i].pr/3600;
-        printf("%s %s %d %d\n", mb, pr_info[i].mb_st, sec ,h_s);
+        printf("%d\n", pr_info[i].pr);
+        printf("%s\n", pr_info[i].mb_st);
         if ( strcmp( mb, pr_info[i].mb_st) == 0 && sec < h_s)
         {
             return sec*pr_s;
