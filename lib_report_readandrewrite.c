@@ -136,7 +136,7 @@ int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char 
     {
         if(strcmp(lp,(sheet + i)->lp) == 0 && strcmp(pv,(sheet + i)->pv) == 0) 
         {
-            return i;
+            return i+1;
         }
     }
     return 0;

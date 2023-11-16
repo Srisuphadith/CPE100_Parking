@@ -39,7 +39,7 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
 
     if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
-        int loc = find_lp_report( &*fp, sheet, indexs, n_lp, pv);
+        int loc = (find_lp_report( &*fp, sheet, indexs, n_lp, pv)-1);
         printf("%d\n", loc);
         call_time(t);
         read_old_lp_report( sheet, loc, o_t, cl);
