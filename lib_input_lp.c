@@ -15,10 +15,15 @@ void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_
         printf("Time_in : %s\n", d_t_in);
         printf("location: %s\n", d_cl);
     }else{
+        char df_t[9];
+        int df_s;
+
         printf("lp : %s %s\n", d_lp, d_pv);
         printf("Time_in   : %s\n", d_t_in);
         printf("Time_out  : %s\n", d_t_out);
-        printf("Time_total: %s\n", d_t_in);
+        df_ctoi_time( d_t_in, d_t_out, &df_s);
+        cv_df_stotime( df_s, df_t);
+        printf("Time_total: %s\n", df_t);
         printf("location: %s\n", d_cl);
         printf("Price : %.2f bath", d_price);
     }
@@ -40,12 +45,12 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
     if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
         int loc = (find_lp_report( &*fp, sheet, indexs, n_lp, pv)-1);
-        printf("%d\n", loc);
+        // printf("%d\n", loc);
         call_time(t);
         read_old_lp_report( sheet, loc, o_t, cl);
-        display( n_lp, pv, o_t, t, "-", 0, cl); 
         write_old_lp_report( sheet, loc, t, 1000);
         rewrite_file_report( &*fp, sheet, *indexs);
+        display( n_lp, pv, o_t, t, "-", 0, cl); 
     }else{
         call_time(t);
         display( n_lp, pv, t, "-", "-", 0, "b1");
