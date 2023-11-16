@@ -138,6 +138,10 @@ int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char 
         {
             return i+1;
         }
+        // else if( strcmp( (sheet + i)->t_out, "-"))
+        // {
+        //     return -1;
+        // }
     }
     return 0;
 }

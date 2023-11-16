@@ -1,3 +1,4 @@
 license_plate,province,time_in,time_out,price,car_location,member
 AA1234,Bangkok,10:10:25,10:17:43,1000.00,B3,non-member
 AB1234,Nonthaburi,10:10:34,10:10:44,1000.00,B3,non-member
+AA7894,Bangkok,10:48:35,10:48:49,1000.00,B3,non-member
