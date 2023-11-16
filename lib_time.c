@@ -34,7 +34,7 @@ void cv_df_stotime(int t_sec, char *time)
     strcat( tmp, ":");
     itoa( (t_sec%60), beff, 10);
     strcat( tmp, beff);
-    printf("%s", tmp);
+    // printf("%s", tmp);
     strcpy( time, tmp);
 }
 
