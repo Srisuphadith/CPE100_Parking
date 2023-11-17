@@ -1,36 +1,62 @@
 #include <stdio.h>
 #include <string.h>
 
-int registerV(){
-    FILE *file = fopen("register.csv", "a");
-
-    if (file == NULL) {
-        printf("Can't open the file.\n");
-        return 1;
-    }
-
-    // ทำการลูปและบันทึกข้อมูลลงในไฟล์
-    while (1==1)
-    {
-        char number[10];
-        printf("Enter numbers (Enter END to stop.): ");// ป้อนข้อมูลจากผู้ใช้
-        scanf("%s", number);
-        if (strcmp("END",number)==0){
-            fclose(file);// ปิดไฟล์
-            break;
-        }
-        else{
-            fprintf(file, "%s\n", number);
-            printf("The information is saved in a file. register.csv\n");
-    }
-    }
+int registerV() {
+    char input[10];
+    printf("Input car number (type 'END' to finish)\n");
     
-    return 0;
+    while (1) {
+        scanf("%s", input);
+        
+        if (strcmp("END", input) == 0) 
+        {
+            break;  
+        }
+
+        FILE *fp = fopen("register.csv", "r");
+        if (fp == NULL) 
+        {
+            printf("Error opening file.\n");
+            return 1;  
+        }
+
+        char data[10];
+        int check = 0;
+
+        while (fscanf(fp, "%s", data) != EOF) {
+            if (strcmp(input, data) == 0) 
+            {
+                check = 1;
+                printf("This car is already registered.\n");
+                printf("Input car number (type 'END' to finish)\n");
+            }
+        }
+
+        fclose(fp);
+
+        if (check == 0) 
+        {
+            fp = fopen("register.csv", "a");
+            if (fp == NULL) 
+            {
+                printf("Error opening file.\n");
+                return 1;  
+            }
+            fprintf(fp, "%s\n", input);  
+            printf("Input car number (type 'END' to finish)\n");
+            fclose(fp);
+        }
+    }
+
+    return 0;  
 }
-
-
-
 
 int main() {
     registerV();
+    return 0; 
 }
+
+    
+
+
+    
