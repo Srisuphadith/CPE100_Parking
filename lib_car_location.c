@@ -11,7 +11,7 @@ typedef struct // define location datatype
 
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]);
 void read_file_location(FILE **fp, location *car);
-int findAvailable(FILE **fp , location *car ,char floor[2]);
+int findAvailable(FILE **fp , location *car,location *car_AVB,char floor[2]);
 char *findLocationFromLicense(FILE **fp, location *car, char license[9]);
 char *findLicenseFromLocation(FILE **fp, location *car, char location[3]);
 
@@ -79,7 +79,7 @@ void read_file_location(FILE **fp, location *car)
 
 //------------------------------------------------------------------------------------------
 //findAvailable from (**file , *location , floor)
-int findAvailable(FILE **fp , location *car ,char floor[2]){
+int findAvailable(FILE **fp , location *car,location *car_AVB,char floor[2]){
 
     read_file_location(fp, car); //call read_file_location
 
@@ -89,6 +89,11 @@ int findAvailable(FILE **fp , location *car ,char floor[2]){
     for(int i=0;i<24;i++){
         if(strcmp( floor , car[i].floor)==0){
             if(car[i].status == 0){
+                
+                strcpy((car_AVB+space)->floor,car[i].floor);
+                strcpy((car_AVB+space)->license,car[i].license);
+                (car_AVB+space)->slot = car[i].slot;
+                (car_AVB+space)->status = car[i].status;
                 space++;
             }
         }
@@ -103,7 +108,7 @@ int findAvailable(FILE **fp , location *car ,char floor[2]){
 // int main(void){
 //     location car[25];
 //     FILE *fp_location;
-//     printf("%d",findAvailable(&fp_location, car , "A") );
+//     printf("%d",findAvailable(&fp_location, car , car_AVB, "A") );
 //     return 0;
 // }
 
