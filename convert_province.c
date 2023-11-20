@@ -24,10 +24,11 @@ int convert_province(int id , char *name){
     while (fscanf(dataset_provinces,"%d , %s", &province[i].num, province[i].name) != EOF){
         if(id == province[i].num){
             strcpy(name,province[i].name);
-            break;
+            return -1;
         }
         i++;
     }
+    return 0; 
     fclose(dataset_provinces);
 }
 //------------------end----------------------//

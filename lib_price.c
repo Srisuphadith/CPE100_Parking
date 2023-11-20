@@ -39,15 +39,15 @@ float calculate_price( int sec, char mb[])
 
         int h_s = pr_info[i].hr_low * 3600;
         float pr_s = pr_info[i].pr/3600;
-        printf("%d\n", pr_info[i].pr);
-        printf("%s\n", pr_info[i].mb_st);
+        // printf("%d\n", pr_info[i].pr);
+        // printf("%s\n", pr_info[i].mb_st);
         if ( strcmp( mb, pr_info[i].mb_st) == 0 && sec < h_s)
         {
             return sec*pr_s;
         }
 
     }
-    printf("not found");
+    printf("Not found\n");
     return 0;
 
     fclose(fp);
