@@ -1,0 +1,9 @@
+member_stat,time_hr_lower,pricerate_perhour
+non-member,2,360000
+non-member,5,150
+non-member,10,300
+non-member,24,1000
+member,2,180000
+member,5,100
+member,10,150
+member,24,500
