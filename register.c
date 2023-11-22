@@ -1,23 +1,37 @@
 #include <stdio.h>
 #include <string.h>
 
+void read_member(){
+    int i=0;
+    FILE *fp = fopen("member.csv", "r");
+    if (fp == NULL) 
+    {
+        printf("Error opening file.\n");
+    }
+    char data_member[10];
+    while (fscanf(fp, "%s", data_member) != EOF) {
+        printf("%s\n", data_member);
+    }
+    fclose(fp);
+}
+
 int registerV() {
     char input[10];
     printf("Input car number (type 'END' to finish)\n");
     
     while (1) {
-        scanf("%s", input);
+        scanf(" %s", input);
         
         if (strcmp("END", input) == 0) 
         {
             break;  
         }
 
-        FILE *fp = fopen("register.csv", "r");
+        FILE *fp = fopen("member.csv", "r");
         if (fp == NULL) 
         {
             printf("Error opening file.\n");
-            return 1;  
+            break;
         }
 
         char data[10];
@@ -36,7 +50,7 @@ int registerV() {
 
         if (check == 0) 
         {
-            fp = fopen("register.csv", "a");
+            fp = fopen("member.csv", "a");
             if (fp == NULL) 
             {
                 printf("Error opening file.\n");
@@ -48,13 +62,14 @@ int registerV() {
         }
     }
 
-    return 0;  
+    return 0;
+
 }
 
-int main() {
-    registerV();
-    return 0; 
-}
+// int main() {
+//     registerV();
+//     return 0; 
+// }
 
     
 

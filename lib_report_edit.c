@@ -31,7 +31,7 @@ int main()
     char new_time_in[9] = "10:40:10";
     char new_time_out[9] = "11:40:11";
     float new_price = 1000.00;
-    char new_car_location[3] = "b3";
+    char new_car_location[3] = "B3";
     char new_member[10] = "non-member";
     char buff[200];
     int index;

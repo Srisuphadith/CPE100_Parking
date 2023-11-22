@@ -22,7 +22,7 @@ void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_
         printf("Time_out  : %s\n", d_t_out);
         printf("Time_total: %s\n", d_df_time);
         printf("location: %s\n", d_cl);
-        printf("Price : %.2f bath", d_price);
+        printf("Price : %.2f bath\n", d_price);
     }
 }
 
@@ -41,6 +41,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
 
     printf("license plate : ");
     scanf("%s", buff);
+    
     if (strlen(buff)==8){
         sscanf(buff, "%6s%2s", n_lp, id_pv);
     }
@@ -48,6 +49,10 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
         printf("License plate's format is invalid\n");
         return 0;
     }
+    if ( strcmp(n_lp,"admin0")==0 && strcmp(id_pv,"00") == 0 ){
+        return -1;
+    }
+    elif
 
     if (convert_province( atoi(id_pv), pv) == 0 )
     {
@@ -55,10 +60,6 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
         return 0;
     }
     
-    
-    if ( strcmp(n_lp,"admin0")==0 && strcmp(id_pv,"00") == 0 ){
-        return -1;
-    }
     
     if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
