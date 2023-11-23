@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 //------------------------------------------------------------------------------------------
 typedef struct // define location datatype
 {
@@ -11,9 +12,32 @@ typedef struct // define location datatype
 
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]);
 void read_file_location(FILE **fp, location *car);
-int findAvailable(FILE **fp , location *car,location *car_AVB,char floor[2]);
-char *findLocationFromLicense(FILE **fp, location *car, char license[9]);
-char *findLicenseFromLocation(FILE **fp, location *car, char location[3]);
+int findAvailable(FILE **fp , location *car,location *car_AVB);
+char *findLocationFromLicense(FILE **fp, location *car);
+char *findLicenseFromLocation(FILE **fp, location *car);
+int get_car_lot(FILE **fp, location *car);
+
+int get_car_lot(FILE **fp, location *car){
+    int count = 0;
+    for (int j = 0; j < 24; ++j) {
+        if ((car + j)->status == 1){
+            count++;
+        }
+    }
+    if (count == 24) {
+        printf("Full Parking\n");
+        return -1;
+    }
+
+    int i;
+    do{
+        srand(time(NULL));
+        i = rand()%24+1;
+    }
+    while((car + i)->status == 1);
+
+    return i;
+}
 
 //------------------------------------------------------------------------------------------
 void write_to_file_location(FILE **fp, char floor[], int slot, int status, char license[]) //,int pos[], char floor[], char slot[], char status[], char license[]
@@ -79,10 +103,11 @@ void read_file_location(FILE **fp, location *car)
 
 //------------------------------------------------------------------------------------------
 //findAvailable from (**file , *location , floor)
-int findAvailable(FILE **fp , location *car,location *car_AVB,char floor[2]){
-
+int findAvailable(FILE **fp , location *car,location *car_AVB){
+    char floor[2];
     read_file_location(fp, car); //call read_file_location
-
+    printf("Enter floor:");
+    scanf(" %s", floor);
     int isAvailable , slot , space =0;
 
     //check floor input and return find how many space
@@ -114,9 +139,13 @@ int findAvailable(FILE **fp , location *car,location *car_AVB,char floor[2]){
 
 //------------------------------------------------------------------------------------------
 // findAvailable from (**file , *location , license) make it pointer to get value as character
-char *findLocationFromLicense(FILE **fp, location *car, char license[9])
+char *findLocationFromLicense(FILE **fp, location *car)
 {
+    char license[9];
     char locat[5];
+    printf("Find Location From License.\n\n");
+    printf("License Plate : ");
+    scanf(" %s",license);
     read_file_location(fp, car); // call read_file_location
 
     // check license input and return find location
@@ -166,9 +195,13 @@ char *findLocationFromLicense(FILE **fp, location *car, char license[9])
 
 //------------------------------------------------------------------------------------------
 // findAvailable from (**file , *location , location) make it pointer to get value as character
-char *findLicenseFromLocation(FILE **fp, location *car, char location[3])
+char *findLicenseFromLocation(FILE **fp, location *car)
 {
-    char locat[5];
+    char location[3];
+    
+    printf("Find License From Location.\n\n");
+    printf("Location : ");
+    scanf(" %s",location);
     read_file_location(fp, car); // call read_file_location
 
     // check location input and return find location

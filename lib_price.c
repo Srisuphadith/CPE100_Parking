@@ -28,6 +28,7 @@ float calculate_price( int sec, char mb[])
     fscanf( fp, "%s", tmp);
     for ( int i = 0; fscanf( fp,"%s", tmp) != EOF; i++)
     {
+        printf("Debug");
         char *token = strtok( tmp, ",");
         strcpy( pr_info[i].mb_st, token);
 

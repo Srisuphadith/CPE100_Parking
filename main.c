@@ -1,17 +1,24 @@
-#include "lib_car_location.c"
+
 #include "print_summary.c"
 #include "lib_input_lp.c"
 #include "graphic.c"
-#include "register.c"
+
 int main() // A(1-8),B(9-16),C(17,24)
 {
     //pass --> password
     char verify_pass[20];
     char base_pass[20] = "0"; 
     int options;
+
     FILE *file;
     report_info report[100];
     int index = 0;
+
+    location car[25];
+    location car_AVB[25];
+    FILE *fp_location;
+    
+
     while (1) {
         system("cls");
         read_file_report(&file, report, &index);
@@ -36,6 +43,8 @@ int main() // A(1-8),B(9-16),C(17,24)
             printf("3 : Register Menu.\n");
             printf("4 : Register Member.\n");
             printf("5 : Show Graphic.\n");
+            printf("6 : Find Location From License\n");
+            printf("7 : Find License From Location\n");
             printf("0 : Back\n");
             printf("Enter a number of Options: ");
             scanf(" %d", &options);
@@ -50,10 +59,7 @@ int main() // A(1-8),B(9-16),C(17,24)
                     print_data("report_sheet.csv");
                     break;
                 case 2:
-                    location car[25];
-                    location car_AVB[25];
-                    FILE *fp_location;
-                    printf("Avaible Parking Space --> %d\n", findAvailable(&fp_location, car, car_AVB, "A"));
+                    printf("Avaible Parking Space --> %d\n", findAvailable(&fp_location, car, car_AVB));
                     break;
                 case 3:
                     printf("Registor Member.\n\n");
@@ -66,6 +72,29 @@ int main() // A(1-8),B(9-16),C(17,24)
                 case 5:
                     printf("Simulation.\n\n");
                     showGraphic(NULL);
+                    break;
+                case 6:
+                    char *result_locate = findLocationFromLicense(&fp_location, car);
+                    if (strcmp(result_locate, "License not found") == 0)
+                    {
+                        printf("License not found\n");
+                    }
+                    else
+                    {
+                        printf("Location: %s\n", result_locate);
+                    }
+                    free(result_locate);
+                    break;
+                case 7:
+                    char *result_lisense = findLicenseFromLocation(&fp_location, car);
+                    if (strcmp(result_lisense, "Doesn't Have This Location") == 0)
+                    {
+                        printf("Doesn't Have This Location\n");
+                    }
+                    else
+                    {
+                        printf("License: %s\n", result_lisense);
+                    }
                     break;
                 default:
                     printf("Invalid option, please try again.\n");

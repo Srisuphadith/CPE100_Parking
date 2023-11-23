@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "convert_province.c"
 
 void read_member();
 void check_member(char lp[], char* stat_member);
@@ -30,7 +31,7 @@ void check_member(char lp[],char* stat_member)
     }
 
     char tmp[11];
-    for(;fscanf( fp, "%s", tmp) != EOF;)
+    while(fscanf( fp, "%s", tmp) != EOF)
     {
         if ( strcmp( lp, tmp) == 0)
         {
@@ -45,16 +46,34 @@ void check_member(char lp[],char* stat_member)
 }
 
 int registerV() {
-    char input[10];
-    printf("Input car number (type 'END' to finish)\n");
+    printf("Register System\n");
     
     while (1) {
-        scanf(" %s", input);
+        char full_licens_plate[20];
+        printf("License plate (type 'END' to stop entry) : ");
+        scanf(" %s", full_licens_plate);
+        char n_lp[7];
+        char id_pv[3];
+        char pv[26];
         
-        if (strcmp("END", input) == 0) 
-        {
-            break;  
+        //check a format of license plate-----------
+        if (strlen(full_licens_plate)==8){
+            sscanf(full_licens_plate, "%6s%2s", n_lp, id_pv);
         }
+        else{
+            if (strcmp("END", full_licens_plate) == 0) 
+            {
+                break;  
+            }
+            printf("License plate's format is invalid\n");
+            break;
+        }
+        if (convert_province( atoi(id_pv), pv) == 0 )
+        {
+            printf("This id : %s not found as the province\n",id_pv);
+            break;
+        }
+        //-----------------------------------------------
 
         FILE *fp = fopen("member.csv", "r");
         if (fp == NULL) 
@@ -63,15 +82,14 @@ int registerV() {
             break;
         }
 
-        char data[10];
+        char data[9];
         int check = 0;
 
         while (fscanf(fp, "%s", data) != EOF) {
-            if (strcmp(input, data) == 0) 
+            if (strcmp(full_licens_plate, data) == 0) 
             {
                 check = 1;
                 printf("This car is already registered.\n");
-                printf("Input car number (type 'END' to finish)\n");
             }
         }
 
@@ -83,11 +101,11 @@ int registerV() {
             if (fp == NULL) 
             {
                 printf("Error opening file.\n");
-                return 1;  
+                break; 
             }
-            fprintf(fp, "%s\n", input);  
-            printf("Input car number (type 'END' to finish)\n");
+            fprintf(fp, "%s\n", full_licens_plate);
             fclose(fp);
+            printf("Registered\n");
         }
     }
 

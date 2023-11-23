@@ -20,7 +20,7 @@ int print_data(char *name_sheet){
         printf("Error opening file\n");
         return 0;
     }
-    fscanf(datasheet,"%s",data.license); //make a first low dissappear.
+    fscanf(datasheet,"%s",data.license); //make a first row dissappear.
     printf("| License Plate | Province                 | Time In  | Time Out |  Price   | Car Location | Member     |\n");
     printf("|---------------|--------------------------|----------|----------|----------|--------------|------------|\n");
 

@@ -23,17 +23,17 @@ void cv_itoc_time(int i_hr, int i_min, int i_sec, char *c_time)
 
 void cv_df_stotime(int t_sec, char *time)
 {
-    char tmp[10];
-    char beff[10];
+    char tmp[10]="";
+    char buff[10];
 
-    itoa( (t_sec/3600), beff, 10);
-    strcat( tmp, beff);
+    itoa( (t_sec/3600), buff, 10);
+    strcat( tmp, buff);
     strcat( tmp, ":");
-    itoa( ((t_sec/60)%60), beff, 10);
-    strcat( tmp, beff);
+    itoa( ((t_sec/60)%60), buff, 10);
+    strcat( tmp, buff);
     strcat( tmp, ":");
-    itoa( (t_sec%60), beff, 10);
-    strcat( tmp, beff);
+    itoa( (t_sec%60), buff, 10);
+    strcat( tmp, buff);
     // printf("%s", tmp);
     strcpy( time, tmp);
 }

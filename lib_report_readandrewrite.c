@@ -23,14 +23,15 @@ int find_lp_report( FILE **fp, report_info *sheet, int *indexs1, char lp[], char
 void read_file_report( FILE **fp, report_info *sheet, int *indexs)
 {
 
-    *fp = fopen("report_sheet.csv","r+");
+    *fp = fopen("report_sheet.csv","r+"); // read file report
 
     float num;
     char tmp[200];
 
-    fscanf( *fp, "%s", tmp);
+    fscanf( *fp, "%s", tmp);  //clear first row
 
-    for (int i = 0; fscanf( *fp, "%s", tmp) != EOF; i++, *indexs = i)
+    //loop to read a file and input a data into a report_info report[100]
+    for (int i = 0; fscanf( *fp, "%s", tmp) != EOF; i++, *indexs = i) 
     {
 
         char *token = strtok( tmp, ",");
@@ -72,10 +73,10 @@ void rewrite_file_report( FILE **fp, report_info *sheet, int indexs)
     char o_p[6] = "price";
     char o_cl[13] = "car_location";
     char o_mb[7] = "member";
-
+    // write a first row
     fprintf( *fp, "%s,%s,%s,%s,%s,%s,%s\n", o_lp, o_pv, o_ti, o_to, o_p, o_cl, o_mb);
     for(int i = 0; i < indexs; i++){
-
+    
         fprintf( *fp, "%s,%s,%s,%s,%.2f,%s,%s\n"
         , (sheet + i)->lp
         , (sheet + i)->pv
