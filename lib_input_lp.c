@@ -6,7 +6,7 @@
 #include"lib_price.c"
 
 void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[]);
-void input_lp(FILE **fp, report_info *sheet, int *indexs);
+int input_lp(FILE **fp, report_info *sheet, int *indexs);
 
 void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[])
 {
@@ -22,11 +22,11 @@ void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_
         printf("Time_out  : %s\n", d_t_out);
         printf("Time_total: %s\n", d_df_time);
         printf("location: %s\n", d_cl);
-        printf("Price : %.2f bath", d_price);
+        printf("Price : %.2f bath\n", d_price);
     }
 }
 
-void input_lp(FILE **fp, report_info *sheet, int *indexs)
+int input_lp(FILE **fp, report_info *sheet, int *indexs)
 {
     char n_lp[7];
     char id_pv[3];
@@ -37,10 +37,29 @@ void input_lp(FILE **fp, report_info *sheet, int *indexs)
     float pr;
     char df_t[9];
     int df_s;
+    char buff[20];
 
     printf("license plate : ");
-    scanf("%6s%2s", n_lp, id_pv);
-    convert_province( atoi(id_pv), pv);
+    scanf("%s", buff);
+    
+    if (strlen(buff)==8){
+        sscanf(buff, "%6s%2s", n_lp, id_pv);
+    }
+    else{
+        printf("License plate's format is invalid\n");
+        return 0;
+    }
+    if ( strcmp(n_lp,"admin0")==0 && strcmp(id_pv,"00") == 0 ){
+        return -1;
+    }
+    elif
+
+    if (convert_province( atoi(id_pv), pv) == 0 )
+    {
+        printf("This id not found as province\n");
+        return 0;
+    }
+    
     
     if(find_lp_report( &*fp, sheet, indexs, n_lp, pv))
     {
