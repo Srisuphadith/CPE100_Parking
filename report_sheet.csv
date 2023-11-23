@@ -1,4 +1,3 @@
-
 license_plate,province,time_in,time_out,price,car_location,member
 AB3303,Sa_kaeo,14:0:19,14:0:38,950.00,B3,non-member
-
+AA1000,Sa_kaeo,14:4:17,-,0.00,B3,non-member
