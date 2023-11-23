@@ -4,6 +4,7 @@
 #include"convert_province.c"
 #include"lib_time.c"
 #include"lib_price.c"
+#include"register.c"
 
 void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[]);
 int input_lp(FILE **fp, report_info *sheet, int *indexs);
@@ -37,6 +38,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
     float pr;
     char df_t[9];
     int df_s;
+    char mb_stat[11];
     char buff[20];
 
     printf("license plate : ");
@@ -52,8 +54,6 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
     if ( strcmp(n_lp,"admin0")==0 && strcmp(id_pv,"00") == 0 ){
         return -1;
     }
-    elif
-
     if (convert_province( atoi(id_pv), pv) == 0 )
     {
         printf("This id not found as province\n");
@@ -69,7 +69,8 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
         read_old_lp_report( sheet, loc, o_t, cl);
         df_ctoi_time( o_t, t, &df_s);
         cv_df_stotime( df_s, df_t);
-        pr = calculate_price( df_s, "member");
+        check_member( n_lp, mb_stat);
+        pr = calculate_price( df_s, mb_stat);
         write_old_lp_report( sheet, loc, t, pr);
         rewrite_file_report( &*fp, sheet, *indexs);
         display( n_lp, pv, o_t, t, df_t, pr, cl); 
@@ -77,7 +78,8 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
         call_time(t);
         display( n_lp, pv, t, "-", "-", 0, "b1");
         // printf("%d\n", *indexs);
-        *indexs = write_new_lp_report( sheet, *indexs, n_lp, pv, t, "B3", "non-member");
+        check_member( n_lp, mb_stat);
+        *indexs = write_new_lp_report( sheet, *indexs, n_lp, pv, t, "B3", mb_stat);
         rewrite_file_report( &*fp, sheet, *indexs);
         // printf("%d\n", *indexs);
     }

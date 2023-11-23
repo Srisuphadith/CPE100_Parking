@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
+void read_member();
+void check_member(char lp[], char* stat_member);
+int registerV();
+
 void read_member(){
     int i=0;
     FILE *fp = fopen("member.csv", "r");
@@ -13,6 +17,31 @@ void read_member(){
         printf("%s\n", data_member);
     }
     fclose(fp);
+}
+
+void check_member(char lp[],char* stat_member)
+{
+    FILE *fp = fopen( "member.csv", "r");
+
+    if( fp == NULL)
+    {
+        printf("Error opening member_file");
+        return;
+    }
+
+    char tmp[11];
+    for(;fscanf( fp, "%s", tmp) != EOF;)
+    {
+        if ( strcmp( lp, tmp) == 0)
+        {
+            strcpy( stat_member, "member");
+            return;
+        }
+    }
+    strcpy( stat_member, "non-member");
+
+    fclose(fp);
+    return;
 }
 
 int registerV() {
