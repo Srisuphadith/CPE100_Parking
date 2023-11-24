@@ -69,7 +69,7 @@ int call_time(char *time_)
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-    cv_itoc_time(tm.tm_hour, tm.tm_min, tm.tm_sec, s_time);
+    cv_itoc_time( tm.tm_hour , tm.tm_min , tm.tm_sec , s_time);
     strcpy( time_, s_time);
     // printf("%s\n", time_);
     //printf("now: %02d:%02d:%02d\n", tm.tm_hour, tm.tm_min, tm.tm_sec);

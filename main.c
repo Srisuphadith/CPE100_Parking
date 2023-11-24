@@ -9,6 +9,7 @@ int main() // A(1-8),B(9-16),C(17,24)
     char verify_pass[20];
     char base_pass[20] = "0"; 
     int options;
+    float time_speed;
 
     FILE *file;
     report_info report[100];
@@ -18,11 +19,14 @@ int main() // A(1-8),B(9-16),C(17,24)
     location car_AVB[25];
     FILE *fp_location;
     
-
+    system("cls");
+    printf("To accelerate the testing process, speed up the time between the car entering the park and its exit.\n");
+    printf("Enter time speed (Ex : 1.25) :");
+    scanf(" %f", &time_speed);
     while (1) {
         system("cls");
         read_file_report(&file, report, &index);
-        while (input_lp(&file, report, &index) != -1) {}
+        while (input_lp(&file, report, &index, time_speed) != -1) {}
         
         system("cls");
         printf("Please, Verify your Identity\n");

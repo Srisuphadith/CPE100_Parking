@@ -7,9 +7,9 @@
 #include "lib_car_location.c"
 
 void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[]);
-int input_lp(FILE **fp, report_info *sheet, int *indexs);
+int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed);
 
-int input_lp(FILE **fp, report_info *sheet, int *indexs)
+int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
 {
     char n_lp[7];
     char id_pv[3];
@@ -50,10 +50,11 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
         int loc = (find_lp_report( &*fp, sheet, indexs, n_lp, pv)-1);
         // printf("%d\n", loc);
         call_time(t);
+        read_old_lp_report( sheet, loc, o_t, cl);
         df_ctoi_time( o_t, t, &df_s);
+        df_s *= time_speed;
         cv_df_stotime( df_s, df_t);
         pr = calculate_price( df_s, mb_stat);
-        read_old_lp_report( sheet, loc, o_t, cl);
         read_file_location(&fp_location, car);
         int slot;
         sscanf(cl+1," %d",&slot);
@@ -70,8 +71,9 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs)
             return 0;
         }
         write_to_file_location(&fp_location, car[car_lot].floor, car[car_lot].slot, 1, buff);
-        strcat(cl,car[car_lot].floor);
+        strcpy(cl,car[car_lot].floor);
         sprintf(cl + strlen(cl), "%d", car[car_lot].slot);
+        printf(" %s", cl);
         display( n_lp, pv, t, "-", "-", 0, cl);
         // printf("%d\n", *indexs);
         check_member( buff, mb_stat);
