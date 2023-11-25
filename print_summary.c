@@ -2,17 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct
-{
-    char license[9],name_province[25],
-    time_in[9],time_out[9],car_location[3],member[11],price[6];
-}data_info;
-
-
 
 int print_data(char *name_sheet);
 
 int print_data(char *name_sheet){
+    typedef struct
+    {
+        char license[9],name_province[25],
+        time_in[9],time_out[9],car_location[3],member[11],price[6];
+    }data_info;
     FILE *datasheet;
     data_info data;
     int i = 0;

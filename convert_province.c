@@ -2,16 +2,18 @@
 #include <string.h>
 
 //--province info datatype--//
-typedef struct
-    {
-        int num;
-        char name[25];
-    } province_info;
+
 //-----------------------//
 
 int convert_province(int id , char *name);
 
 int convert_province(int id , char *name){
+    typedef struct
+    {
+        int num;
+        char name[25];
+    } province_info;
+    
     FILE *dataset_provinces;
     province_info province[80];
     int i=0; 
