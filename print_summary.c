@@ -13,7 +13,6 @@ int print_data(char *name_sheet){
     }data_info;
     FILE *datasheet;
     data_info data;
-    int i = 0;
     datasheet = fopen(name_sheet,"r");
     // if can not open file print out error.
     if (datasheet == NULL) {
