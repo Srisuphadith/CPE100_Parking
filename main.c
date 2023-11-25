@@ -123,11 +123,8 @@ int main() // A(1-8),B(9-16),C(17,24)
                 //print error if user enter a invalid number options.
                     printf("Invalid option, please try again.\n");
             }
-            if (options == -1){
-                break;
-            }
         //if options == 0 break the loop and go back to input license plate console.
-        } while (options != 0);
+        } while (options != 0 && options != -1);
     }
     return 0;
 }
