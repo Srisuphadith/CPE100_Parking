@@ -30,7 +30,7 @@ int main() // A(1-8),B(9-16),C(17,24)
         read_file_report(&file, report, &index);
         //read file report_sheet to collect a data of report and amount of car in report_sheet.
         while (input_lp(&file, report, &index, time_speed) != -1) {}
-        //input_lp == -1 mean user enter "admin000".
+        //input_lp() == -1 mean user enter "admin000".
         system("cls");
         
         printf("Please, Verify your Identity\n");
