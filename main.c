@@ -9,18 +9,19 @@ int main() // A(1-8),B(9-16),C(17,24)
     char verify_pass[20];
     char base_pass[20] = "0"; 
     int options;
-    float time_speed;
+    float time_speed=1.00;
 
     FILE *file;
     report_info report[100];
     int index = 0;
 
+    //Create a variable to store data from the car location function.
     location car[25];
     location car_AVB[25];
     FILE *fp_location;
     
     system("cls");
-    printf("To accelerate the testing process, speed up the time between the car entering the park and its exit.\n");
+    printf("To accelerate the testing process, speed up the time \nbetween the car entering the park and its exit.\n");
     printf("Enter time speed (Ex : 1.25) :");
     scanf(" %f", &time_speed);
     while (1) {
