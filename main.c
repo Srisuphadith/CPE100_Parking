@@ -25,10 +25,7 @@ int main() // A(1-8),B(9-16),C(17,24)
     printf("To accelerate the testing process, speed up the time \nbetween the car entering the park and its exit.\n");
     printf("Enter time speed (Ex : 1.25) :");
     scanf(" %f", &time_speed);
-    while (1) {
-        if (options == -1){
-            break;
-        }
+    while (options != -1) {
         system("cls");
         read_file_report(&file, report, &index);
         //read file report_sheet to collect a data of report and amount of car in report_sheet.
@@ -61,6 +58,7 @@ int main() // A(1-8),B(9-16),C(17,24)
             //admin enter an options to continue.
             printf("Enter a number of Options to continue: ");
             scanf(" %d", &options);
+
             system("cls");
 
             //call function depend on options that admin enter.
@@ -111,7 +109,7 @@ int main() // A(1-8),B(9-16),C(17,24)
                     char *result_lisense = findLicenseFromLocation(&fp_location, car);
                     if (strcmp(result_lisense, "Doesn't Have This Location") == 0)
                     {
-                        printf("Doesn't Have This Location\n");
+                        printf("Doesn't Have a car in This Location\n");
                     }
                     else
                     {
