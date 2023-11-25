@@ -8,7 +8,7 @@ int main() // A(1-8),B(9-16),C(17,24)
     //pass --> password
     char verify_pass[20];
     char base_pass[20] = "0"; 
-    int options;
+    int options=0;
     float time_speed=1.00;
 
     //Create a variable to store data from the input license plate function.
@@ -26,6 +26,9 @@ int main() // A(1-8),B(9-16),C(17,24)
     printf("Enter time speed (Ex : 1.25) :");
     scanf(" %f", &time_speed);
     while (1) {
+        if (options == -1){
+            break;
+        }
         system("cls");
         read_file_report(&file, report, &index);
         //read file report_sheet to collect a data of report and amount of car in report_sheet.
@@ -54,6 +57,7 @@ int main() // A(1-8),B(9-16),C(17,24)
             printf("6 : Find Location From License\n");
             printf("7 : Find License From Location\n");
             printf("0 : Back\n");
+            printf("-1 : Quit the Programs\n");
             //admin enter an options to continue.
             printf("Enter a number of Options to continue: ");
             scanf(" %d", &options);
@@ -62,6 +66,8 @@ int main() // A(1-8),B(9-16),C(17,24)
 
             //call function depend on options that admin enter.
             switch (options) {
+                case -1:
+                    break;
                 case 0:
                     break;
                 case 1:
@@ -116,6 +122,9 @@ int main() // A(1-8),B(9-16),C(17,24)
                 default:
                 //print error if user enter a invalid number options.
                     printf("Invalid option, please try again.\n");
+            }
+            if (options == -1){
+                break;
             }
         //if options == 0 break the loop and go back to input license plate console.
         } while (options != 0);
