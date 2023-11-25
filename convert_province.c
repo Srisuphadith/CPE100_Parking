@@ -33,9 +33,10 @@ int convert_province(int id , char *name){
         }
         i++;
     }
+    fclose(dataset_provinces);
     //but if read all of data in file but number do not match let return 0.
     return 0; 
-    fclose(dataset_provinces);
+    
 }
 //------------------end----------------------//
 
