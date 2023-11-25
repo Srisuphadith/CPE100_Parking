@@ -29,7 +29,7 @@ int print_data(char *name_sheet){
     while (fscanf(datasheet, " %[^,], %[^,], %[^,], %[^,], %[^,], %[^,], %s",
                    data.license, data.name_province,
                    data.time_in, data.time_out,
-                   &data.price, data.car_location, data.member) != EOF)
+                   data.price, data.car_location, data.member) != EOF)
     {
         printf("| %-13s | %-24s | %-8s | %-8s | %-8s | %-12s | %-10s |\n",
                data.license, data.name_province,
