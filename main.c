@@ -61,7 +61,6 @@ int main() // A(1-8),B(9-16),C(17,24)
             //admin enter an options to continue.
             printf("Enter a number of Options to continue: ");
             scanf(" %d", &options);
-            printf("\n");
             system("cls");
 
             //call function depend on options that admin enter.
