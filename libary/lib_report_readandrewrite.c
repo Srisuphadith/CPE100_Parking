@@ -16,7 +16,7 @@ typedef struct
 void read_file_report( FILE **fp, report_info *sheet, int *indexs);
 void rewrite_file_report( FILE **fp, report_info *sheet, int indexs);
 int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[]);
-void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price);
+void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price, char mb_stat[]);
 void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl, char* o_mbstat);
 int find_lp_report( FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[]);
 
@@ -108,7 +108,7 @@ int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[]
     return i;
 }
 
-void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price)
+void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price,char mb_stat[])
 {
     int i = loc;
 
@@ -118,7 +118,7 @@ void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float pri
     strcpy( (sheet + i)->t_out, n_t_out);
     (sheet + i)->price = price;
     strcpy( (sheet + i)->cl, (sheet + i)->cl);
-    strcpy( (sheet + i)->mb, (sheet + i)->mb);
+    strcpy( (sheet + i)->mb, mb_stat);
     
 }
 

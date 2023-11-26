@@ -60,7 +60,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
         int slot;
         sscanf(cl+1," %d",&slot);
         write_to_file_location(&fp_location, &cl[0], slot , 0, "00000000");
-        write_old_lp_report( sheet, loc, t, pr);
+        write_old_lp_report( sheet, loc, t, pr, mb_stat);
         rewrite_file_report( &*fp, sheet, *indexs);
         display( n_lp, pv, o_t, t, df_t, pr, cl, mb_stat); 
     }
