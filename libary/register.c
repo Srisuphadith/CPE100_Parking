@@ -7,17 +7,17 @@ void check_member(char lp[], char* stat_member);
 int registerV();
 
 void read_member(){
-    int i=0;
-    FILE *fp = fopen("member.csv", "r");
-    if (fp == NULL) 
+    int i=0;  // Initialize a counter variable i
+    FILE *fp = fopen("member.csv", "r");  // Open the file "member.csv" in read mode
+    if (fp == NULL)   // Check if the file was opened successfully
     {
         printf("Error opening file.\n");
     }
-    char data_member[10];
-    while (fscanf(fp, "%s", data_member) != EOF) {
-        printf("%s\n", data_member);
+    char data_member[10];    // Declare an array to store data from the file 
+    while (fscanf(fp, "%s", data_member) != EOF) { // Read data from the file until the end of the file is reached
+        printf("%s\n", data_member);    // Print the data read from the file
     }
-    fclose(fp);
+    fclose(fp); // Close the file after reading
 }
 
 void check_member(char lp[],char* stat_member)
@@ -113,10 +113,6 @@ int registerV() {
 
 }
 
-// int main() {
-//     registerV();
-//     return 0; 
-// }
 
     
 
