@@ -82,7 +82,7 @@ int main() // A(1-8),B(9-16),C(17,24)
                     registerV(NULL);
                     break;
                 case 4:
-                //call registerV function to pritnt out all of member.
+                //call read_member function to pritnt out all of member.
                     printf("Member:\n");
                     read_member(NULL);
                     break;
