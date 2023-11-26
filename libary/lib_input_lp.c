@@ -6,7 +6,7 @@
 #include"register.c"
 #include "lib_car_location.c"
 
-void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[]);
+void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[], char d_mbstat[]);
 int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed);
 
 int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
@@ -61,7 +61,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
         write_to_file_location(&fp_location, &cl[0], slot , 0, "00000000");
         write_old_lp_report( sheet, loc, t, pr);
         rewrite_file_report( &*fp, sheet, *indexs);
-        display( n_lp, pv, o_t, t, df_t, pr, cl); 
+        display( n_lp, pv, o_t, t, df_t, pr, cl, mb_stat); 
     }
     else{
         call_time(t);
@@ -73,9 +73,9 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
         write_to_file_location(&fp_location, car[car_lot].floor, car[car_lot].slot, 1, buff);
         strcpy(cl,car[car_lot].floor);
         sprintf(cl + strlen(cl), "%d", car[car_lot].slot);
-        display( n_lp, pv, t, "-", "-", 0, cl);
-        // printf("%d\n", *indexs);
         check_member( buff, mb_stat);
+        display( n_lp, pv, t, "-", "-", 0, cl, mb_stat);
+        // printf("%d\n", *indexs);
         *indexs = write_new_lp_report( sheet, *indexs, n_lp, pv, t, cl, mb_stat);
         rewrite_file_report( &*fp, sheet, *indexs);
         // printf("%d\n", *indexs);
@@ -83,7 +83,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
 
 }
 
-void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[])
+void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_time[], float d_price, char d_cl[], char d_mbstat[])
 {
     printf("\n");
     if( d_price == 0 && (strcmp( d_df_time,"-") == 0 ) && (strcmp( d_t_out,"-") == 0))
@@ -91,6 +91,7 @@ void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_
         printf("LP. : %s %s\n", d_lp, d_pv);
         printf("Time in : %s\n", d_t_in);
         printf("Location : %s\n", d_cl);
+        printf("%s\n",d_mbstat);
     }else{
         
         printf("LP. : %s %s\n", d_lp, d_pv);
@@ -98,6 +99,7 @@ void display(char d_lp[], char d_pv[], char d_t_in[], char d_t_out[], char d_df_
         printf("Time out  : %s\n", d_t_out);
         printf("Time total: %s\n", d_df_time);
         printf("Location : %s\n", d_cl);
+        printf("%s\n",d_mbstat);
         printf("Price : %.2f bath\n", d_price);
     }
     printf("\n");
