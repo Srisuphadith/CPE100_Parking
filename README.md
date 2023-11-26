@@ -12,7 +12,7 @@ Link -> <a href="https://lucid.app/lucidchart/87a6b2a7-24bf-4dc3-8c84-7978d5fb68
 # Responsibilities <br>
 <li>ภู - กราฟฟิคลานจอด</li> <br>
 <li>นาย - จัดเก็บรถลงโลเคชั่น</li> <br>
-<li>ฟีน - join table</li> <br>
+<li>ฟีน - ฐานข้อมูลจังหวัดและป้ายทะเบียน merge</li> <br>
 <li>ฟีฟ่า - เสิร์ชโลเคชั่น กับ ที่ว่าง</li> <br>
 <li>เอฟ - เวลากับคำนวณราคา</li> <br>
 <li>นัท - ระบบเมมเบอร์</li> <br>
