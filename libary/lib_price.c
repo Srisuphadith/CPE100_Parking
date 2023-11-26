@@ -47,7 +47,8 @@ float calculate_price( int sec, char mb[])
 
     }
     printf("Not found\n");
+    fclose(fp);
     return 0;
 
-    fclose(fp);
+    
 }
