@@ -17,7 +17,7 @@ void read_file_report( FILE **fp, report_info *sheet, int *indexs);
 void rewrite_file_report( FILE **fp, report_info *sheet, int indexs);
 int write_new_lp_report( report_info *sheet, int index2,char n_lp[], char n_pv[], char n_t_in[], char n_cl[], char mb_s[]);
 void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float price);
-void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl);
+void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl, char* o_mbstat);
 int find_lp_report( FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[]);
 
 void read_file_report( FILE **fp, report_info *sheet, int *indexs)
@@ -122,12 +122,13 @@ void write_old_lp_report( report_info *sheet, int loc, char n_t_out[], float pri
     
 }
 
-void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl)
+void read_old_lp_report( report_info *sheet, int loc, char *o_t_in, char *o_cl, char* o_mbstat)
 {
     int i = loc;
 
     strcpy( o_t_in, (sheet + i)->t_in);
     strcpy( o_cl, (sheet + i)->cl);
+    strcpy( o_mbstat, (sheet + i)->mb);
 }
 
 int find_lp_report(FILE **fp, report_info *sheet, int *indexs1, char lp[], char pv[])

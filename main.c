@@ -1,7 +1,6 @@
-
-#include "print_summary.c"
-#include "lib_input_lp.c"
-#include "graphic.c"
+#include "libary/print_summary.c"
+#include "libary/lib_input_lp.c"
+#include "libary/graphic.c"
 
 int main() // A(1-8),B(9-16),C(17,24)
 {

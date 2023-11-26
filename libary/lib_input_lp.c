@@ -50,7 +50,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
         int loc = (find_lp_report( &*fp, sheet, indexs, n_lp, pv)-1);
         // printf("%d\n", loc);
         call_time(t);
-        read_old_lp_report( sheet, loc, o_t, cl);
+        read_old_lp_report( sheet, loc, o_t, cl, mb_stat);
         df_ctoi_time( o_t, t, &df_s);
         df_s *= time_speed;
         cv_df_stotime( df_s, df_t);
@@ -73,7 +73,6 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
         write_to_file_location(&fp_location, car[car_lot].floor, car[car_lot].slot, 1, buff);
         strcpy(cl,car[car_lot].floor);
         sprintf(cl + strlen(cl), "%d", car[car_lot].slot);
-        printf(" %s", cl);
         display( n_lp, pv, t, "-", "-", 0, cl);
         // printf("%d\n", *indexs);
         check_member( buff, mb_stat);

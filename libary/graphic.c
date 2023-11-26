@@ -2,18 +2,17 @@
 #include <stdbool.h>
 #include <string.h>
 
-int car_lot[8];
+int car_lot[8];             // <-- declare array.
 int car_park_posU[5];
 int car_park_posD[5];
 
-void convertPosition(int n_of_carPark, int *car_lot, int *car_park_posU, int *car_park_posD);
+void convertPosition(int n_of_carPark, int *car_lot, int *car_park_posU, int *car_park_posD);   // <-- list of exists function in this file.
 void printMiddle_N_floor(char floor[2]);
 void read_file_location_graph(location *location);
-void showGraphic();
+void showGraphic();                                                                             // <-- main function.
 
-void convertPosition(int n_of_carPark, int *car_lot, int *car_park_posU, int *car_park_posD) {
-  
-  for (int i=0; i<n_of_carPark; i++) {
+void convertPosition(int n_of_carPark, int *car_lot, int *car_park_posU, int *car_park_posD) {  // <-- convert exists car parking lot number (1-8)
+  for (int i=0; i<n_of_carPark; i++) {                                                          // to be position to place " * "
    if (car_lot[i] < 5) {
       if (car_lot[i] == 1) {
         car_park_posU[i] = 2;
@@ -29,7 +28,6 @@ void convertPosition(int n_of_carPark, int *car_lot, int *car_park_posU, int *ca
       }
     } 
     else {
-      // printf("Hello World");
       if (car_lot[i] == 5) {
         car_park_posD[i] = 2;
       }
@@ -107,17 +105,6 @@ void showGraphic() {
     }
 
   // printf("numberofcar_park -->%d\n", n_of_carPark); //debug
-
-  // ----------ทิ้ง----------
-  // sscanf(&cars[0][0], "%s", &floor);
-  // for (int i = 0; i < row; i++) {
-  //   for (int j=0; j<2; j++) {
-  //     sscanf(&cars[i][j], "%d", &car_lot[i]);
-  //     printf("%d\n",cars[i][j]);
-  //     printf("-->%d\n",car_lot[i]);
-  //   } 
-  // }
-  // -------------------------
   
   convertPosition(n_of_carPark, car_lot, car_park_posU, car_park_posD);
 
