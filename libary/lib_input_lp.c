@@ -51,6 +51,7 @@ int input_lp(FILE **fp, report_info *sheet, int *indexs, float time_speed)
         // printf("%d\n", loc);
         call_time(t);
         read_old_lp_report( sheet, loc, o_t, cl, mb_stat);
+        check_member( buff, mb_stat);
         df_ctoi_time( o_t, t, &df_s);
         df_s *= time_speed;
         cv_df_stotime( df_s, df_t);
