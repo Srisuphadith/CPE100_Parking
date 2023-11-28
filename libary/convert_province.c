@@ -29,6 +29,7 @@ int convert_province(int id , char *name){
         //if same number copy a name of a province that read in a same row with number and return -1.
         if(id == province[i].num){
             strcpy(name,province[i].name);
+            fclose(dataset_provinces);
             return -1;
         }
         i++;
